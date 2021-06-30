@@ -1,5 +1,5 @@
 import { Application, Router } from 'express';
-import { BaseClientRouter } from '../../app/BaseClientRouter';
+import { BaseClientRouter } from '../../app';
 import { IRoute } from '../../commonTypes/clientRoute';
 import { IClientRouter } from '../../commonTypes/clientRouter';
 
