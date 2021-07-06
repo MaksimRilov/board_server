@@ -4,11 +4,19 @@ import { Server } from './app';
 import { taskGetEndpoints, TaskRouter } from './task';
 import { userGetEndpoints, UserRouter } from './user';
 
-const server: IServer = new Server({ router: express.Router, app: express() });
-server.init(3030);
+const initApp = async () => {
+  const server: IServer = new Server({ router: express.Router, app: express() });
+  server.init(3030);
 
-const taskRouter = server.addClientRouter(TaskRouter);
-taskRouter.init(taskGetEndpoints);
+  // todo: await server.initDataBase
 
-const userRouter = server.addClientRouter(UserRouter);
-userRouter.init(userGetEndpoints);
+  server.addGlobalMiddlewares([]);
+
+  const taskRouter = server.addClientRouter(TaskRouter);
+  taskRouter.init(taskGetEndpoints);
+
+  const userRouter = server.addClientRouter(UserRouter);
+  userRouter.init(userGetEndpoints);
+};
+
+initApp();

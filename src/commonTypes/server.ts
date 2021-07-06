@@ -1,4 +1,4 @@
-import { Application, Router, RouterOptions } from 'express';
+import { Application, RequestHandler, Router, RouterOptions } from 'express';
 import { IClientRouter, IClientRouterConstructable } from './clientRouter';
 
 export type RouterCreator = (options?: RouterOptions | undefined) => Router;
@@ -13,4 +13,5 @@ export interface IServer {
   router: RouterCreator;
   init: (port?: number) => void;
   addClientRouter: (ClientRouter: IClientRouterConstructable) => IClientRouter;
+  addGlobalMiddlewares: (middlewares: RequestHandler[]) => void;
 }

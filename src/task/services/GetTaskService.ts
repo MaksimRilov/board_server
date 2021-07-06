@@ -1,7 +1,13 @@
-import { IGetTaskService } from '../types';
+import { BaseTask, IGetTaskService, ITaskRepository } from '../types';
 
 export class GetTaskService implements IGetTaskService {
-  public getTask = (): { message: string } => {
-    return { message: 'TAAASK' };
+  constructor(private taskRepository: ITaskRepository) {}
+
+  public getAllTasks = (): BaseTask[] => {
+    return this.taskRepository.getAllTasks();
+  };
+
+  public getTask = (id: string): BaseTask | null => {
+    return this.taskRepository.getTask(id);
   };
 }

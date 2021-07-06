@@ -1,4 +1,4 @@
-import { Application } from 'express';
+import { Application, RequestHandler } from 'express';
 import { IClientRouter, IClientRouterConstructable } from '../commonTypes/clientRouter';
 import { IServer, RouterCreator, ServerConstructor } from '../commonTypes/server';
 
@@ -21,4 +21,8 @@ export class Server implements IServer {
 
   public addClientRouter = (ClientRouter: IClientRouterConstructable): IClientRouter =>
     new ClientRouter(this.router(), this.app, this.baseUrl);
+
+  public addGlobalMiddlewares = (middlewares: RequestHandler[]): void => {
+    middlewares.forEach((mw) => this.app.use(mw));
+  };
 }
